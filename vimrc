@@ -2,13 +2,13 @@
 set colorcolumn=80
 set modelines=1
 set modeline
-syntax enable	
+syntax enable
 set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 set expandtab
 set showcmd " Show command
-set cursorline 
+set cursorline
 filetype indent on
 set wildmenu " Visual autocomplete for command menu
 set wildmode=longest:full,full
@@ -17,6 +17,15 @@ set showmatch " Highlight matching parenthesis
 " highlight last inserted text
 nnoremap gV `[v`]
 map Q :qa<CR>
+
+" Always display the status line, even if only one window is displayed
+set laststatus=2
+
+" Use visual bell instead of beeping when doing something wrong
+set visualbell
+
+" Use <F11> to toggle between 'paste' and 'nopaste'
+set pastetoggle=<F11>
 " }}}
 " SEARHCHING  {{{
 set hlsearch
@@ -64,6 +73,16 @@ augroup configgroup
     autocmd BufEnter *.sh setlocal softtabstop=2
 augroup END
 " }}}
-  
- 
+
+" Auto cmd {{{
+"
+" Remove all trailing space
+autocmd BufWritePre * :%s/\s\+$//e
+"autocmd FileType modula autocmd BufWritePre
+
+set colorcolumn=80
+au BufRead,BufNewFile *.md setlocal textwidth=80
+" }}}
+
+
 " vim:foldmethod=marker:foldlevel=0
