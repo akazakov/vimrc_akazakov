@@ -1,6 +1,9 @@
 " UI {{{
+set directory=$HOME/.vim_swap/
+" Allow editing multiple buffers wihtout saving
+set hidden
 set colorcolumn=80
-set modelines=1
+set modelines=10
 set modeline
 syntax enable
 set tabstop=2
@@ -8,7 +11,7 @@ set softtabstop=2
 set shiftwidth=2
 set expandtab
 set showcmd " Show command
-set cursorline
+"set cursorline
 filetype indent on
 set wildmenu " Visual autocomplete for command menu
 set wildmode=longest:full,full
@@ -50,8 +53,6 @@ nnoremap k gk
 augroup configgroup
     autocmd!
     autocmd VimEnter * highlight clear SignColumn
-    autocmd BufWritePre *.php,*.py,*.js,*.txt,*.hs,*.java,*.md
-                \:call <SID>StripTrailingWhitespaces()
     autocmd FileType java setlocal noexpandtab
     autocmd FileType java setlocal list
     autocmd FileType java setlocal listchars=tab:+\ ,eol:-
@@ -65,6 +66,9 @@ augroup configgroup
     autocmd FileType ruby setlocal softtabstop=2
     autocmd FileType ruby setlocal commentstring=#\ %s
     autocmd FileType python setlocal commentstring=#\ %s
+    autocmd FileType python setlocal tabstop=4
+    autocmd FileType python setlocal softtabstop=4
+    autocmd FileType python setlocal shiftwidth=4
     autocmd BufEnter *.cls setlocal filetype=java
     autocmd BufEnter *.zsh-theme setlocal filetype=zsh
     autocmd BufEnter Makefile setlocal noexpandtab
@@ -79,10 +83,23 @@ augroup END
 " Remove all trailing space
 autocmd BufWritePre * :%s/\s\+$//e
 "autocmd FileType modula autocmd BufWritePre
-
+set autoindent
 set colorcolumn=80
 au BufRead,BufNewFile *.md setlocal textwidth=80
+" Init pathogen
+let g:pymode_rope_complete_on_dot = 0
+execute pathogen#infect()
 " }}}
 
 
-" vim:foldmethod=marker:foldlevel=0
+" Prevent opening a doc window when autocompleting
+set completeopt=menu
+
+"let g:solarized_visibility = "high"
+"let g:solarized_contrast = "high"
+"let g:solarized_termcolors = 256
+"let g:solarized_termtrans = 1
+
+set background=dark
+colorscheme solarized
+let g:vim_markdown_new_list_item_indent = 0
